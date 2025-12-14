@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+    <title>Home</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <!-- End Header/Navigation -->
+
+    <!-- Start Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Shop</h1>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Hero Section -->
+
+
+
+    <div class="untree_co-section product-section before-footer-section">
+        <div class="container">
+            <div class="row">
+
+                <!-- Start Column 1 -->
+                <div th:each="product:${products}" class="col-12 col-md-4 col-lg-3 mb-5">
+                    <a class="product-item" th:href="@{/product/{id}(id=${product.id})}">
+                        <img th:src="${product.imageUrl}" class="img-fluid product-thumbnail">
+                        <h3 th:text="${product.name}" class="product-title">Nordic Chair</h3>
+                        <strong th:text="${product.price}"  class="product-price">$50.00</strong>
+
+                        <form action="/cart/add"  method="post" class="add-to-cart-form">
+                            <input type="hidden" name="productId" th:value="${product.id}" />
+                            <button type="submit" class="icon-cross-btn">
+                                   <span class="icon-cross">
+								<img src="/front/images/cross.svg" class="img-fluid">
+							</span>
+                            </button>
+                        </form>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
