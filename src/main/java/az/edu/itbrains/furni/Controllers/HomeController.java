@@ -1,7 +1,10 @@
 package az.edu.itbrains.furni.Controllers;
 
+import az.edu.itbrains.furni.dtos.ModelDto;
 import az.edu.itbrains.furni.dtos.ProductDto;
 import az.edu.itbrains.furni.dtos.TestimonialsDto;
+import az.edu.itbrains.furni.repositories.ModelRepository;
+import az.edu.itbrains.furni.services.ModelService;
 import az.edu.itbrains.furni.services.ProductService;
 import az.edu.itbrains.furni.services.TermonialsService;
 import org.springframework.stereotype.Controller;
@@ -15,9 +18,11 @@ import java.util.List;
 public class HomeController {
     private final ProductService productService;
 private final TermonialsService termonialsService;
-    public HomeController(ProductService productService, TermonialsService termonialsService) {
+private final ModelService modelService;
+    public HomeController(ProductService productService, TermonialsService termonialsService, ModelService modelService) {
         this.productService = productService;
         this.termonialsService = termonialsService;
+        this.modelService = modelService;
     }
 
     @GetMapping("/")
@@ -27,7 +32,9 @@ private final TermonialsService termonialsService;
         return "index.html";
     }
     @GetMapping("/about")
-    public String about(){
+    public String about(Model model){
+        List<ModelDto>modelDtoList=modelService.getAllModels();
+        model.addAttribute("models",modelDtoList);
         return "about.html";
     }
     @GetMapping("/blog")

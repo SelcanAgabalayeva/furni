@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{/dashboard/layout.html}">
+<head>
+  <title>Home</title>
+</head>
+
+<body>
+<div layout:fragment="body">
+  <a  class="btn btn-outline-success" th:href="@{/admin/contact/create}">Create</a>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">FirstName</th>
+      <th scope="col">LastName</th>
+      <th scope="col">Email</th>
+      <th scope="col">Message</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="contact , data : ${contacts}" >
+      <th th:text="${data.index+1}" scope="row">1</th>
+      <td th:text="${contact.firstName}">Mark</td>
+      <td th:text="${contact.lastName}">Mark</td>
+      <td th:text="${contact.email}">Mark</td>
+      <td th:text="${contact.message}">Mark</td>
+      <td>
+        <a th:href="'/admin/contact/update/'+${contact.id}" class="btn btn-outline-warning">update</a>
+    <a th:href="'/admin/contact/delete/'+${contact.id}" class="btn btn-outline-danger">delete</a>
+      </td>
+    </tr>
+
+
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
